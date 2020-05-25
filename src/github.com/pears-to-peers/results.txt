@@ -1,0 +1,787 @@
+I am the Central Server
+--- FAIL: TestStartStop1 (0.01 seconds)
+panic: runtime error: close of closed channel [recovered]
+	panic: runtime error: close of closed channel
+
+goroutine 4 [running]:
+runtime.panic(0x6aefc0, 0xa211f5)
+	/usr/local/go/src/pkg/runtime/panic.c:266 +0xb6
+testing.func·005()
+	/usr/local/go/src/pkg/testing/testing.go:385 +0xe8
+runtime.panic(0x6aefc0, 0xa211f5)
+	/usr/local/go/src/pkg/runtime/panic.c:248 +0x106
+github.com/pears-to-peers/centralServer/servertests.TestStartStop1(0xc2100551b0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:540 +0x4c4
+testing.tRunner(0xc2100551b0, 0xa1f2e0)
+	/usr/local/go/src/pkg/testing/testing.go:391 +0x8b
+created by testing.RunTests
+	/usr/local/go/src/pkg/testing/testing.go:471 +0x8b2
+
+goroutine 1 [chan receive]:
+testing.RunTests(0x79d2b0, 0xa1f2e0, 0x3, 0x3, 0x1)
+	/usr/local/go/src/pkg/testing/testing.go:472 +0x8d5
+testing.Main(0x79d2b0, 0xa1f2e0, 0x3, 0x3, 0xa24f40, ...)
+	/usr/local/go/src/pkg/testing/testing.go:403 +0x84
+main.main()
+	github.com/pears-to-peers/centralServer/servertests/_test/_testmain.go:51 +0x9c
+
+goroutine 5 [syscall]:
+runtime.goexit()
+	/usr/local/go/src/pkg/runtime/proc.c:1394
+
+goroutine 6 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8950, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210047d10, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210047d10, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).accept(0xc210047cb0, 0x79f290, 0x0, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_unix.go:382 +0x2c2
+net.(*TCPListener).AcceptTCP(0xc210000408, 0x511fcb, 0x7f02cca50eb0, 0x511fcb)
+	/usr/local/go/src/pkg/net/tcpsock_posix.go:233 +0x47
+net.(*TCPListener).Accept(0xc210000408, 0x7f02cc9f89f8, 0xc2100e8278, 0xc2100d4100, 0x0)
+	/usr/local/go/src/pkg/net/tcpsock_posix.go:243 +0x27
+net/http.(*Server).Serve(0xc210020d70, 0x7f02cc9f7988, 0xc210000408, 0x0, 0x0)
+	/usr/local/go/src/pkg/net/http/server.go:1622 +0x91
+net/http.Serve(0x7f02cc9f7988, 0xc210000408, 0x0, 0x0, 0x7f02cc9f7988, ...)
+	/usr/local/go/src/pkg/net/http/server.go:1561 +0x70
+created by github.com/pears-to-peers/centralServer.(*central_server).Start
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/central_server_impl.go:99 +0x1a4
+
+goroutine 8 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8800, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210047f40, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210047f40, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210047ee0, 0xc21007d000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210000430, 0xc21007d000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100396c0)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100396c0, 0xc21000ace0, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100396c0, 0xc21000ace0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100396c0, 0xc21000ace0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100396c0, 0xc21000ace0, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a0f0, 0xc21006a12c)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a0f0, 0xc210080800, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a0f0, 0x61a880, 0xc2100808a0, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a0f0, 0x61a880, 0xc2100808a0, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc210065e40, 0xc2100808a0, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc210065e40, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc210065e40, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc210065e40)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc210000430)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc210010820, 0xc210060820)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc210010820, 0xc210060820)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc210010820, 0xc210060820)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc21005e880)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 9 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f88a8, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210047e60, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210047e60, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210047e00, 0xc21007f000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210000470, 0xc21007f000, 0x1000, 0x1000, 0xc210066096, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc210039720)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc210039720, 0xc21000ad00, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc210039720, 0xc21000ad00, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc210039720, 0xc21000ad00, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc210039720, 0xc21000ad00, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a1e0, 0xc210038b60)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a1e0, 0xc210082000, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a1e0, 0x61a8c0, 0xc2100820f0, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a1e0, 0x61a8c0, 0xc2100820f0, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc210065120, 0xc2100820f0, 0xc21004ebe0, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc210039780)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 11 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f86b0, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210087a70, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210087a70, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210087a10, 0xc210093000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100002f8, 0xc210093000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc21008a1e0)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc21008a1e0, 0xc2100857a0, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc21008a1e0, 0xc2100857a0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc21008a1e0, 0xc2100857a0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc21008a1e0, 0xc2100857a0, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a2d0, 0xc21006a30c)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a2d0, 0xc21008bb00, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a2d0, 0x61a880, 0xc21008bb00, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a2d0, 0x61a880, 0xc21008bb00, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc21008c360, 0xc21008bb00, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc21008c360, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc21008c360, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc21008c360)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc2100002f8)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc210010be0, 0xc210038d00)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc210010be0, 0xc210038d00)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc210010be0, 0xc210038d00)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc21005ef80)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 12 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8758, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210087990, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210087990, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210087930, 0xc210095000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210090008, 0xc210095000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc21008a240)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc21008a240, 0xc2100857c0, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc21008a240, 0xc2100857c0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc21008a240, 0xc2100857c0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc21008a240, 0xc2100857c0, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a3c0, 0xc210097b60)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a3c0, 0xc21008c500, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a3c0, 0x61a8c0, 0xc21008c570, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a3c0, 0x61a8c0, 0xc21008c570, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc21008c510, 0xc21008c570, 0xc21008b540, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc21008a2a0)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 14 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8560, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210098a70, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210098a70, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210098a10, 0xc2100a7000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210090948, 0xc2100a7000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc21008ade0)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc21008ade0, 0xc21009f200, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc21008ade0, 0xc21009f200, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc21008ade0, 0xc21009f200, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc21008ade0, 0xc21009f200, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a4b0, 0xc21006a4ec)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a4b0, 0xc21009ea00, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a4b0, 0x61a880, 0xc21009ea20, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a4b0, 0x61a880, 0xc21009ea20, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc2100a0570, 0xc21009ea20, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc2100a0570, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc2100a0570, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc2100a0570)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc210090948)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc210010e60, 0xc210097d00)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc210010e60, 0xc210097d00)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc210010e60, 0xc210097d00)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc21005e400)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 15 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8608, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210098990, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210098990, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210098930, 0xc2100a9000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210090988, 0xc2100a9000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc21008ae40)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc21008ae40, 0xc21009f220, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc21008ae40, 0xc21009f220, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc21008ae40, 0xc21009f220, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc21008ae40, 0xc21009f220, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a5a0, 0xc2100aaa90)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a5a0, 0xc2100a0700, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a5a0, 0x61a8c0, 0xc2100a0780, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a5a0, 0x61a8c0, 0xc2100a0780, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc2100a0720, 0xc2100a0780, 0xc21009e460, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc21008aea0)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 17 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8410, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc2100aca00, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc2100aca00, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100ac9a0, 0xc2100ba000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100b02c8, 0xc2100ba000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100aba20)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100aba20, 0xc21009fc60, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100aba20, 0xc21009fc60, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100aba20, 0xc21009fc60, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100aba20, 0xc21009fc60, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a690, 0xc21006a6cc)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a690, 0xc2100b3900, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a690, 0x61a880, 0xc2100b3940, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a690, 0x61a880, 0xc2100b3940, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc2100b2780, 0xc2100b3940, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc2100b2780, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc2100b2780, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc2100b2780)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc2100b02c8)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc210010500, 0xc2100aac30)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc210010500, 0xc2100aac30)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc210010500, 0xc2100aac30)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc21005e480)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 18 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f84b8, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc2100ac920, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc2100ac920, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100ac8c0, 0xc2100bc000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100b0308, 0xc2100bc000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100aba80)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100aba80, 0xc21009fc80, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100aba80, 0xc21009fc80, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100aba80, 0xc21009fc80, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100aba80, 0xc21009fc80, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a780, 0xc2100aab60)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a780, 0xc2100b2900, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a780, 0x61a8c0, 0xc2100b2990, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a780, 0x61a8c0, 0xc2100b2990, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc2100b2930, 0xc2100b2990, 0xc2100b3380, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc2100abae0)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 20 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f82c0, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210087a00, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210087a00, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100879a0, 0xc21008e000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100b0c48, 0xc21008e000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc21008a540)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc21008a540, 0xc210085490, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc21008a540, 0xc210085490, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc21008a540, 0xc210085490, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc21008a540, 0xc210085490, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a870, 0xc21006a8ac)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a870, 0xc210080700, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a870, 0x61a880, 0xc2100807a0, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a870, 0x61a880, 0xc2100807a0, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc21009a660, 0xc2100807a0, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc21009a660, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc21009a660, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc21009a660)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc2100b0c48)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc2100bd1e0, 0xc210097000)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc2100bd1e0, 0xc210097000)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc2100bd1e0, 0xc210097000)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc21005e300)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 21 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8368, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210087370, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210087370, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc210087310, 0xc2100b4000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100b0c88, 0xc2100b4000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc21008a600)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc21008a600, 0xc2100854f0, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc21008a600, 0xc2100854f0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc21008a600, 0xc2100854f0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc21008a600, 0xc2100854f0, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006a960, 0xc210097ea0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006a960, 0xc21009a900, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006a960, 0x61a8c0, 0xc21009a990, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006a960, 0x61a8c0, 0xc21009a990, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc21009a8d0, 0xc21009a990, 0xc21009e3c0, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc21008a660)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 23 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStart(0xc2100852c0, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:120 +0x30
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:531 +0x418
+
+goroutine 24 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8170, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210047450, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210047450, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100473f0, 0xc2100c8000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210090530, 0xc2100c8000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100a3240)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100a3240, 0xc2100a4310, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100a3240, 0xc2100a4310, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100a3240, 0xc2100a4310, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100a3240, 0xc2100a4310, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006aa50, 0xc21006aa8c)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006aa50, 0xc2100c2b00, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006aa50, 0x61a880, 0xc2100c2b40, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006aa50, 0x61a880, 0xc2100c2b40, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc210065b10, 0xc2100c2b40, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc210065b10, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc210065b10, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc210065b10)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc210090530)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc2100bd3c0, 0xc2100600d0)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc2100bd3c0, 0xc2100600d0)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc2100bd3c0, 0xc2100600d0)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc21005ed80)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 25 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8218, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc210047220, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc210047220, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100471c0, 0xc2100ca000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210090578, 0xc2100ca000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100a32a0)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100a32a0, 0xc2100a4330, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100a32a0, 0xc2100a4330, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100a32a0, 0xc2100a4330, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100a32a0, 0xc2100a4330, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006ab40, 0xc2100385b0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006ab40, 0xc21001fd00, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006ab40, 0x61a8c0, 0xc21001fd80, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006ab40, 0x61a8c0, 0xc21001fd80, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc21001f510, 0xc21001fd80, 0xc2100c2580, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc2100a3300)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 27 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStart(0xc2100a4260, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:120 +0x30
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:531 +0x418
+
+goroutine 28 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f8020, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc2100cf680, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc2100cf680, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100cf620, 0xc2100da000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100005e0, 0xc2100da000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100a3d80)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100a3d80, 0xc2100a4d70, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100a3d80, 0xc2100a4d70, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100a3d80, 0xc2100a4d70, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100a3d80, 0xc2100a4d70, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006ac30, 0xc21006ac6c)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006ac30, 0xc2100d2a00, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006ac30, 0x61a880, 0xc2100d2a60, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006ac30, 0x61a880, 0xc2100d2a60, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc2100d0f90, 0xc2100d2a60, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc2100d0f90, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc2100d0f90, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc2100d0f90)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc2100005e0)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc2100bd6e0, 0xc210038820)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc2100bd6e0, 0xc210038820)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc2100bd6e0, 0xc210038820)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc2100d4000)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 29 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f80c8, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc2100cf5a0, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc2100cf5a0, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100cf540, 0xc2100dd000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc210000638, 0xc2100dd000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100a3de0)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100a3de0, 0xc2100a4d90, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100a3de0, 0xc2100a4d90, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100a3de0, 0xc2100a4d90, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100a3de0, 0xc2100a4d90, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006ad20, 0xc2100e1750)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006ad20, 0xc2100db100, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006ad20, 0x61a8c0, 0xc2100db1b0, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006ad20, 0x61a8c0, 0xc2100db1b0, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc2100db150, 0xc2100db1b0, 0xc2100d24a0, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc2100a3e40)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 31 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStart(0xc2100a4cc0, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:120 +0x30
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:531 +0x418
+
+goroutine 32 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f7ed0, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc2100e75a0, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc2100e75a0, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100e7540, 0xc2100f2000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100e8278, 0xc2100f2000, 0x1000, 0x1000, 0x7f02cc9f6ea8, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100dfa80)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100dfa80, 0xc2100e07d0, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100dfa80, 0xc2100e07d0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100dfa80, 0xc2100e07d0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100dfa80, 0xc2100e07d0, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006ae10, 0xc21006ae4c)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006ae10, 0xc2100ea900, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006ae10, 0x61a880, 0xc2100ea980, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006ae10, 0x61a880, 0xc2100ea980, 0x40aafe, 0x7f02cc9ee040)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobServerCodec).ReadRequestHeader(0xc2100ef1b0, 0xc2100ea980, 0x7f02cc9ee130, 0x7f02cc9ee000)
+	/usr/local/go/src/pkg/net/rpc/server.go:400 +0x3f
+net/rpc.(*Server).readRequestHeader(0xc210064780, 0x7f02cc9f8cb0, 0xc2100ef1b0, 0x0, 0x0, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:551 +0x9b
+net/rpc.(*Server).readRequest(0xc210064780, 0x7f02cc9f8cb0, 0xc2100ef1b0, 0xc21005e580, 0xc21004eb80, ...)
+	/usr/local/go/src/pkg/net/rpc/server.go:518 +0xa0
+net/rpc.(*Server).ServeCodec(0xc210064780, 0x7f02cc9f8cb0, 0xc2100ef1b0)
+	/usr/local/go/src/pkg/net/rpc/server.go:437 +0x66
+net/rpc.(*Server).ServeConn(0xc210064780, 0x7f02cc9f8c00, 0xc2100e8278)
+	/usr/local/go/src/pkg/net/rpc/server.go:429 +0x140
+net/rpc.(*Server).ServeHTTP(0xc210064780, 0x7f02cc9f8b78, 0xc2100bda00, 0xc2100e18f0)
+	/usr/local/go/src/pkg/net/rpc/server.go:669 +0x36b
+net/http.(*ServeMux).ServeHTTP(0xc21001f6f0, 0x7f02cc9f8b78, 0xc2100bda00, 0xc2100e18f0)
+	/usr/local/go/src/pkg/net/http/server.go:1496 +0x163
+net/http.serverHandler.ServeHTTP(0xc210020d70, 0x7f02cc9f8b78, 0xc2100bda00, 0xc2100e18f0)
+	/usr/local/go/src/pkg/net/http/server.go:1597 +0x16e
+net/http.(*conn).serve(0xc2100d4100)
+	/usr/local/go/src/pkg/net/http/server.go:1167 +0x7b7
+created by net/http.(*Server).Serve
+	/usr/local/go/src/pkg/net/http/server.go:1644 +0x28b
+
+goroutine 33 [IO wait]:
+net.runtime_pollWait(0x7f02cc9f7f78, 0x72, 0x0)
+	/usr/local/go/src/pkg/runtime/netpoll.goc:116 +0x6a
+net.(*pollDesc).Wait(0xc2100e74c0, 0x72, 0x7f02cc9f70e8, 0xb)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:81 +0x34
+net.(*pollDesc).WaitRead(0xc2100e74c0, 0xb, 0x7f02cc9f70e8)
+	/usr/local/go/src/pkg/net/fd_poll_runtime.go:86 +0x30
+net.(*netFD).Read(0xc2100e7460, 0xc2100f4000, 0x1000, 0x1000, 0x0, ...)
+	/usr/local/go/src/pkg/net/fd_unix.go:204 +0x2a0
+net.(*conn).Read(0xc2100e82b8, 0xc2100f4000, 0x1000, 0x1000, 0x40b5e4, ...)
+	/usr/local/go/src/pkg/net/net.go:122 +0xc5
+bufio.(*Reader).fill(0xc2100dfae0)
+	/usr/local/go/src/pkg/bufio/bufio.go:91 +0x110
+bufio.(*Reader).Read(0xc2100dfae0, 0xc2100e07f0, 0x1, 0x9, 0x1, ...)
+	/usr/local/go/src/pkg/bufio/bufio.go:159 +0x1a4
+io.ReadAtLeast(0x7f02cc9f8c60, 0xc2100dfae0, 0xc2100e07f0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:288 +0xf6
+io.ReadFull(0x7f02cc9f8c60, 0xc2100dfae0, 0xc2100e07f0, 0x1, 0x9, ...)
+	/usr/local/go/src/pkg/io/io.go:306 +0x71
+encoding/gob.decodeUintReader(0x7f02cc9f8c60, 0xc2100dfae0, 0xc2100e07f0, 0x9, 0x9, ...)
+	/usr/local/go/src/pkg/encoding/gob/decode.go:66 +0x98
+encoding/gob.(*Decoder).recvMessage(0xc21006af00, 0xc2100f9680)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:73 +0x57
+encoding/gob.(*Decoder).decodeTypeSequence(0xc21006af00, 0xc2100ef300, 0x160)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:159 +0x49
+encoding/gob.(*Decoder).DecodeValue(0xc21006af00, 0x61a8c0, 0xc2100ef3c0, 0x160, 0x0, ...)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:223 +0x12e
+encoding/gob.(*Decoder).Decode(0xc21006af00, 0x61a8c0, 0xc2100ef3c0, 0x0, 0x0)
+	/usr/local/go/src/pkg/encoding/gob/decoder.go:202 +0x1c5
+net/rpc.(*gobClientCodec).ReadResponseHeader(0xc2100ef360, 0xc2100ef3c0, 0xc2100ea3c0, 0x0)
+	/usr/local/go/src/pkg/net/rpc/client.go:221 +0x3f
+net/rpc.(*Client).input(0xc2100dfb40)
+	/usr/local/go/src/pkg/net/rpc/client.go:107 +0xbf
+created by net/rpc.NewClientWithCodec
+	/usr/local/go/src/pkg/net/rpc/client.go:199 +0x91
+
+goroutine 35 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStart(0xc2100e0720, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:119
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:531 +0x418
+
+goroutine 36 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStop(0xc2100852c0, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:482
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:537 +0x4a3
+
+goroutine 37 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStop(0xc2100a4260, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:482
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:537 +0x4a3
+
+goroutine 38 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStop(0xc2100a4cc0, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:482
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:537 +0x4a3
+
+goroutine 39 [runnable]:
+github.com/pears-to-peers/centralServer/servertests.WaitForStop(0xc2100e0720, 0xc210010780, 0xc2100395a0)
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:482
+created by github.com/pears-to-peers/centralServer/servertests.TestStartStop1
+	/afs/andrew.cmu.edu/usr2/carllin/private/15440/pears-to-peers/src/github.com/pears-to-peers/centralServer/servertests/central_server_test.go:537 +0x4a3
+FAIL	github.com/pears-to-peers/centralServer/servertests	0.012s
